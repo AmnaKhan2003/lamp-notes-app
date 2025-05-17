@@ -9,22 +9,29 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/AmnaKhan2003/lamp-notes-app.git'
+                git branch: 'main', url: 'https://github.com/AmnaKhan2003/lamp-notes-app.git'
             }
         }
 
-        stage('Build with Docker Compose') {
+        stage('Build and Deploy Containers') {
             steps {
                 script {
-                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} up -d --build"
+                    // Pehle agar containers chal rahe hain to unhe gracefully stop karo
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} down || true"
+                    
+                    // Fresh build without cache
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} build --no-cache"
+                    
+                    // Containers ko background me start karo, orphans remove karte hue
+                    sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} up -d --remove-orphans"
                 }
             }
         }
     }
-
+    
     post {
         always {
-            echo 'Cleaning up...'
+            echo 'Cleaning up containers...'
             sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} down"
         }
     }
