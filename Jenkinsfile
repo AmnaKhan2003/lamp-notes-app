@@ -6,10 +6,6 @@ pipeline {
         COMPOSE_FILE = 'docker-compose.yml'
     }
 
-    tools {
-        dockerTool 'Default' // Make sure Docker is configured in Jenkins Global Tools
-    }
-
     stages {
         stage('Clone Repository') {
             steps {
