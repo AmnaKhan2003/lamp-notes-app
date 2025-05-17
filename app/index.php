@@ -37,7 +37,7 @@ $notes = $conn->query("SELECT * FROM notes ORDER BY created_at DESC");
         <input name="title" class="form-control" required>
       </div>
       <div class="mb-3">
-        <label class="form-label">description</label>
+        <label class="form-label">Description</label>
         <textarea name="description" class="form-control" rows="3" required></textarea>
       </div>
       <button class="btn btn-primary">Add Note</button>
