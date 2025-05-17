@@ -28,11 +28,5 @@ pipeline {
             }
         }
     }
-    
-    post {
-        always {
-            echo 'Cleaning up containers...'
-            sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} down"
-        }
-    }
+
 }
