@@ -4,7 +4,8 @@ services:
   web:
     build: .
     ports:
-      - "5000:80"
+      - "3000:80"
+    container_name: lamp_web_ci
     depends_on:
       - db
     volumes:
@@ -12,6 +13,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: lamp_db_ci
     environment:
       MYSQL_DATABASE: notesdb
       MYSQL_ROOT_PASSWORD: root
