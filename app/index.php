@@ -29,7 +29,7 @@ $notes = $conn->query("SELECT * FROM notes ORDER BY created_at DESC");
 </head>
 <body>
   <div class="container">
-    <h2 class="mb-4 text-center">📝 My Note </h2>
+    <h2 class="mb-4 text-center">📝 My Note App </h2>
     
     <form method="POST" class="mb-5">
       <div class="mb-3">
