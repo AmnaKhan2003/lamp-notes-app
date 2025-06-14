@@ -29,20 +29,13 @@ $results = $notes->get_result();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h2 class="mb-4 text-center">📝 My Notes</h2>
-    
-    <form method="POST" class="mb-5">
-      <div class="mb-3">
-        <label class="form-label">Title:</label>
-        <input name="title" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Description :</label>
-        <textarea name="description" class="form-control" rows="3" required></textarea>
-      </div>
-      <button class="btn btn-primary">Add Note</button>
-    </form>
+<div class="container mt-5">
+  <h2 class="mb-4">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="logout.php">Logout</a></h2>
+  <form method="POST" class="mb-4">
+    <input name="title" class="form-control mb-2" placeholder="Title" required>
+    <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
+    <button class="btn btn-primary">Add Note</button>
+  </form>
 
   <?php while($row = $results->fetch_assoc()): ?>
   <div class="note-card p-3 mb-3 bg-light rounded">
