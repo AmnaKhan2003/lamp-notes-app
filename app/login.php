@@ -15,20 +15,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_name'] = $user['name'];
         header("Location: index.php");
     } else {
-        echo "Invalid credentials.";
+        $error = "Invalid credentials.";
     }
 }
 ?>
 <!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
-<body>
-<h2>Login</h2>
-<form method="POST">
-  <input name="email" type="email" placeholder="Email" required><br>
-  <input name="password" type="password" placeholder="Password" required><br>
-  <button>Login</button>
-</form>
-<a href="signup.php">New user? Signup</a>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-3">Login</h3>
+    
+    <?php if (!empty($error)): ?>
+      <div class="alert alert-danger text-center"><?= $error ?></div>
+    <?php endif; ?>
+
+    <form method="POST">
+      <div class="mb-3">
+        <input name="email" type="email" class="form-control" placeholder="Email" required>
+      </div>
+      <div class="mb-3">
+        <input name="password" type="password" class="form-control" placeholder="Password" required>
+      </div>
+      <button class="btn btn-primary w-100">Login</button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="signup.php">New user? Signup</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>

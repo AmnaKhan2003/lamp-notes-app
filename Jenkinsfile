@@ -27,6 +27,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Run Selenium Tests') {
+            steps {
+                script {
+                    // Run tests using maven-chrome image
+                    sh """
+                    docker run --rm \
+                      --network ${COMPOSE_PROJECT_NAME}_default \
+                      -v \$PWD/tests-java:/project \
+                      -w /project \
+                      markhobson/maven-chrome mvn test
+                    """
+                }
+            }
+        }
+
+
+
+
     }
 
 }
