@@ -25,7 +25,7 @@ $results = $notes->get_result();
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Note Taking App</title>
+  <title> My Note Taking App</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
