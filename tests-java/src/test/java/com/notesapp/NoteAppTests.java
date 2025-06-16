@@ -124,7 +124,7 @@ public class NoteAppTests {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("note-card")));
         Thread.sleep(1000);
 
-        // Step 3: Find the specific note and delete
+        // Step 3:Find the specific note and delete
         List<WebElement> notes = driver.findElements(By.className("note-card"));
         boolean found = false;
 
