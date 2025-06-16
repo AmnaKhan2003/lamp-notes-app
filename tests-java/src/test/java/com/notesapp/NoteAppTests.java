@@ -47,7 +47,7 @@ public class NoteAppTests {
     public void signupUser() {
         String email = generateRandomEmail();
 
-        driver.get("http://localhost/signup.php");
+        driver.get("http://50.16.109.199:3000/signup.php");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("name"))).sendKeys("testuser1");
         driver.findElement(By.name("email")).sendKeys(email);
         driver.findElement(By.name("password")).sendKeys("password");
@@ -61,7 +61,7 @@ public class NoteAppTests {
 
     @Test
     public void loginUser() {
-        driver.get("http://localhost/login.php");
+        driver.get("http://50.16.109.199:3000/login.php");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("testuser1@example.com");
         driver.findElement(By.name("password")).sendKeys("password");
 
@@ -75,7 +75,7 @@ public class NoteAppTests {
     }
 
     public void login() {
-        driver.get("http://localhost/login.php");
+        driver.get("http://50.16.109.199:3000/login.php");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("testuser1@example.com");
         driver.findElement(By.name("password")).sendKeys("password");
         WebElement loginButton = driver.findElement(By.xpath("//button[contains(text(),'Login')]"));
@@ -220,7 +220,7 @@ public class NoteAppTests {
 
     @Test
     public void preventLoginWithWrongPassword() {
-        driver.get("http://localhost/login.php");
+        driver.get("http://50.16.109.199:3000/login.php");
 
         driver.findElement(By.name("email")).sendKeys("testuser1@example.com");
         driver.findElement(By.name("password")).sendKeys("wrongpassword");
@@ -232,7 +232,7 @@ public class NoteAppTests {
 
     @Test
     public void duplicateSignupShouldFail() {
-        driver.get("http://localhost/signup.php");
+        driver.get("http://50.16.109.199:3000/signup.php");
 
         driver.findElement(By.name("name")).sendKeys("testuser1");
         driver.findElement(By.name("email")).sendKeys("testuser1@example.com"); // already exists
