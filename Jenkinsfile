@@ -16,13 +16,13 @@ pipeline {
         stage('Build and Deploy Containers') {
             steps {
                 script {
-                    // Pehle agar containers chal rahe hain to unhe gracefully stop karo
+                    echo "🛠️ Stopping old containers (if running)..."
                     sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} down || true"
-                    
-                    // Fresh build without cache
+
+                    echo "🧱 Building containers without cache..."
                     sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} build --no-cache"
-                    
-                    // Containers ko background me start karo, orphans remove karte hue
+
+                    echo "🚀 Starting containers..."
                     sh "docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} up -d --remove-orphans"
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 script {
-                    // Run tests using maven-chrome image
+                    echo "🧪 Running Selenium test cases using Maven..."
                     sh """
                     docker run --rm \
                       --network ${COMPOSE_PROJECT_NAME}_default \
@@ -42,10 +42,18 @@ pipeline {
                 }
             }
         }
-
-
-
-
     }
 
+    post {
+        success {
+            echo '✅ All test cases passed successfully!'
+        }
+        failure {
+            echo '❌ Some test cases failed. Please check the Console Output and Test Report.'
+        }
+        always {
+            echo '📦 Publishing test reports...'
+            junit 'tests-java/target/surefire-reports/*.xml'
+        }
+    }
 }
