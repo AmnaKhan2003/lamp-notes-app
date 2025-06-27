@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lamp-notes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lamp-notes
+  template:
+    metadata:
+      labels:
+        app: lamp-notes
+    spec:
+      containers:
+        - name: lamp-notes
+          image: lamp-notes-app
+          ports:
+            - containerPort: 80
