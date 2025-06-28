@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lamp-notes-service
+  name: web-service
 spec:
   type: LoadBalancer
   selector:
-    app: lamp-notes
+    app: web
   ports:
     - port: 80
       targetPort: 80
